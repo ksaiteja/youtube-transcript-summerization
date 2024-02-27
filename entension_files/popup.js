@@ -1,5 +1,24 @@
 const btn = document.getElementById("summarise");
 
+const slider = document.getElementById("mySlider");
+var selectedValue = "";
+slider.addEventListener("input", function () {
+  const value = parseInt(slider.value);
+  switch (value) {
+    case 0:
+      selectedValue = "small";
+      break;
+    case 1:
+      selectedValue = "medium";
+      break;
+    case 2:
+      selectedValue = "large";
+      break;
+    default:
+      selectedValue = "medium";
+  }
+});
+
 btn.addEventListener("click", function () {
   var language = document.getElementById("languageSelect").value;
 
@@ -10,7 +29,12 @@ btn.addEventListener("click", function () {
     var xhr = new XMLHttpRequest();
     xhr.open(
       "GET",
-      "http://127.0.0.1:5000/summary?url=" + url + "&lang=" + language,
+      "http://127.0.0.1:5000/summary?url=" +
+        url +
+        "&lang=" +
+        language +
+        "&length=" +
+        selectedValue,
       true
     );
     xhr.onload = function () {
