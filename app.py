@@ -57,6 +57,7 @@ def summary_api():
                 num_words_to_take = int(len(words) * percentage)
                 selected_words = words[:num_words_to_take]
                 summary = ' '.join(selected_words)
+                # return jsonify({'error': "Transcript not available, please select different video"}), 500
             translated_summary = translator.translate(summary, dest=lang).text
         except Exception as e:
             return jsonify({'error': f'Error translating summary: {str(e)}'}), 500
